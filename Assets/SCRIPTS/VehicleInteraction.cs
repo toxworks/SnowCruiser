@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class VehicleInteraction : MonoBehaviour
 {
+    [SerializeField]
+    private bool isActive = true;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (isActive && other.CompareTag("Player"))
         {
-            other.transform.parent = this.transform;
-        }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            other.transform.rotation = Quaternion.identity; //reset the player's head rotation transform when exiting parent
-            other.transform.parent = null;
+            other.transform.parent = transform;
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (isActive && other.CompareTag("Player"))
+        {
+            other.transform.rotation = Quaternion.identity;
+            other.transform.parent = null;
+        }
+    }
 }
