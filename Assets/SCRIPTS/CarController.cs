@@ -101,7 +101,7 @@ public class CarController : MonoBehaviour
         wheelTransform.position = pos;
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
@@ -116,6 +116,6 @@ public class CarController : MonoBehaviour
             other.transform.rotation = Quaternion.identity; //reset the player's head rotation transform when exiting parent
             other.transform.parent = null;
         }
-    }
+    }*/
     
 }
