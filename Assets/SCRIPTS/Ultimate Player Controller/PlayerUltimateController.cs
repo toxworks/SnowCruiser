@@ -25,6 +25,22 @@ public class PlayerUltimateController : MonoBehaviour
 
     void Update()
     {
+        /*
+        // player movement
+        float x = 0f;
+        float z = 0f;
+        if (Input.GetKey(forwardKey))
+            z += 1f;
+        if (Input.GetKey(backwardKey))
+            z -= 1f;
+        if (Input.GetKey(leftKey))
+            x -= 1f;
+        if (Input.GetKey(rightKey))
+            x += 1f;
+        Vector3 move = transform.right * x + transform.forward * z;
+        characterController.Move(move * speed * Time.deltaTime);
+        */
+
         // player movement
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKey(forwardKey))

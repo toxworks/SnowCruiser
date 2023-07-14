@@ -49,5 +49,6 @@ public class PlayerParent : MonoBehaviour
     {
         transform.parent = null;
         characterController.enabled = true;
+        transform.rotation = Quaternion.identity;
     }
 }
