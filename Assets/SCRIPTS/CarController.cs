@@ -100,22 +100,5 @@ public class CarController : MonoBehaviour
         wheelTransform.rotation = rot;
         wheelTransform.position = pos;
     }
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            other.transform.parent = this.transform;
-        }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            other.transform.rotation = Quaternion.identity; //reset the player's head rotation transform when exiting parent
-            other.transform.parent = null;
-        }
-    }*/
     
 }

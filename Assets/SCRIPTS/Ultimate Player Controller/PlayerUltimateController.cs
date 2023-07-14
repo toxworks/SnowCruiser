@@ -26,7 +26,7 @@ public class PlayerUltimateController : MonoBehaviour
     void Update()
     {
         /*
-        // player movement
+        // old player movement - glitches player movement when carController.cs is pointed towards global X axis
         float x = 0f;
         float z = 0f;
         if (Input.GetKey(forwardKey))
