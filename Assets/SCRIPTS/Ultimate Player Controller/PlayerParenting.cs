@@ -49,6 +49,8 @@ public class PlayerParent : MonoBehaviour
     {
         transform.parent = null;
         characterController.enabled = true;
-        transform.rotation = Quaternion.identity;
+            Vector3 euler = transform.eulerAngles;
+    euler.z = 0f;
+    transform.eulerAngles = euler;
     }
 }
