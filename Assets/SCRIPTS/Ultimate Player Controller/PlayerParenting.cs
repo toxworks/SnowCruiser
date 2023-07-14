@@ -2,50 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerParenting : MonoBehaviour
+public class PlayerParent : MonoBehaviour
 {
-    private bool isInsideVehicle = false;
-    private Transform vehicleTransform;
-    private Vector3 relativePosition;
+    public Transform vehicle; // assign the vehicle in the Inspector
+    private CharacterController characterController;
 
-    private void Update()
+    void Start()
     {
-        if (isInsideVehicle)
+        characterController = GetComponent<CharacterController>();
+    }
+
+    void Update()
+    {
+        // check if player is inside the vehicle
+        if (transform.parent == vehicle)
         {
-            // Update the player's position relative to the vehicle
-            transform.position = vehicleTransform.TransformPoint(relativePosition);
+            // allow player to move inside the vehicle
+            float x = Input.GetAxis("Horizontal") * Time.deltaTime;
+            float z = Input.GetAxis("Vertical") * Time.deltaTime;
+            Vector3 move = transform.right * x + transform.forward * z;
+            transform.localPosition += move;
+
+            // check if player wants to exit the vehicle
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ExitVehicle();
+            }
+        }
+        else
+        {
+            // check if player wants to enter the vehicle
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                EnterVehicle();
+            }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void EnterVehicle()
     {
-        if (other.CompareTag("Vehicle"))
-        {
-            // Store a reference to the vehicle's transform
-            vehicleTransform = other.transform;
-
-            // Calculate the relative position of the player within the vehicle
-            relativePosition = vehicleTransform.InverseTransformPoint(transform.position);
-
-            // Parent the player to the vehicle
-            transform.parent = vehicleTransform;
-
-            // Set the flag to indicate the player is inside the vehicle
-            isInsideVehicle = true;
-        }
+        transform.parent = vehicle;
+        characterController.enabled = false;
     }
 
-    private void OnTriggerExit(Collider other)
+    void ExitVehicle()
     {
-        if (other.CompareTag("Vehicle"))
-        {
-            // Unparent the player from the vehicle
-            transform.parent = null;
-
-            // Clear the references and reset the flag
-            vehicleTransform = null;
-            relativePosition = Vector3.zero;
-            isInsideVehicle = false;
-        }
+        transform.parent = null;
+        characterController.enabled = true;
     }
 }
