@@ -53,7 +53,9 @@ public class PlayerParent : MonoBehaviour
 
     void EnterVehicle()
     {
+        float yRotationDiff = transform.eulerAngles.y - vehicle.eulerAngles.y;
         transform.parent = vehicle;
+        transform.localEulerAngles = new Vector3(0f, yRotationDiff, 0f);
     }
 
     void ExitVehicle()
